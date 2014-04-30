@@ -1,0 +1,3 @@
+StatTrackerTeamsController = Ember.ArrayController.extend({
+
+});
