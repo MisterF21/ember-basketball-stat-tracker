@@ -16,26 +16,28 @@
             <thead>
               <tr><th>Teams</th></tr>
             </thead>
-            {{#each}}
-            <tr><td>
-              {{#link-to 'team' this}}
-                {{name}}
-              {{/link-to}}
-            </td></tr>
-            {{/each}}
+            <tbody>
+              {{#each}}
+              <tr><td>
+                {{#link-to 'team' this}}
+                  {{name}}
+                {{/link-to}}
+              </td></tr>
+              {{/each}}
+              <tr><td>
+                {{#link-to 'new-team' }}New Team{{/link-to}}
+              </tr></td>
+            </tbody>
           </table>
         </div>
         <div class="span6">
           {{outlet}}
         </div>
-        <div class="span3">
-          <h2>Stats</h2>
-        </div>
       </div>
     </div>
   </script>
 
-  <script type="text/x-handlebars" id="team">
+  <script type="text/x-handlebars" data-template-name="team">
     <ul>
        <h1>{{name}}</h1>
         {{#each player in players}}
@@ -46,10 +48,25 @@
           </li>
         {{/each}}
     </ul>
-
+    <div class="span3">
+      {{outlet}}
+    </div>
   </script>
 
-  <script type="text/x-handlebars" id="newTeam">
+  <script type="text/x-handlebars" data-template-name="player">
+    <table class="table">
+      <thead>
+        <tr><th>Stats</th></tr>
+        <tr><th>
+          {{#each stat in stats}}
+            {{stat}}
+          {{/each}}
+        </tr></th>
+      </thead>
+    </table>
+  </script>
+
+  <script type="text/x-handlebars" id="new-team">
    <h2>Add a team</h2>
    {{input type="text" id="new-team" placeholder="Add a team" value=newTeam action="createTeam"}}
   </script>
@@ -68,7 +85,6 @@
   <script src="js/router.js"></script>
   <script src="js/models/team.js"></script>
   <script src="js/models/player.js"></script>
-  <script src="js/models/stat.js"></script>
 
 
   <!-- to activate the test runner, add the "?test" query string parameter -->

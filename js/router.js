@@ -1,9 +1,8 @@
 StatTracker.Router.map(function() {
   this.resource('teams', { path:'/' }, function() {
+    this.resource('newTeam', { path: 'team/new' }),
     this.resource('team', { path:'/team/:team_id' }, function() {
-      this.resource('player', { path: '/player/:player_id' }, function() {
-        this.resource('stat', { path: '/stat' });
-      });
+      this.resource('player', { path: '/player/:player_id' });
     });
   });
 });
@@ -14,20 +13,20 @@ StatTracker.TeamsRoute = Ember.Route.extend({
   }
 });
 
+StatTracker.NewTeamRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.createRecord('team')
+  }
+});
+
 StatTracker.TeamRoute = Ember.Route.extend({
   model: function(params) {
-    return teams.findBy('id', params.team_id);
+    return this.store.find('team', params.team_id);
   }
 });
 
-StatTracker.StatsRoute = Ember.Route.extend( {
+StatTracker.PlayerRoute = Ember.Route.extend( {
   model: function(params) {
-    return stats.findBy('player_id', params.player_id)
-  }
-});
-
-StatTracker.PlayersRoute = Ember.Route.extend( {
-  model: function(params) {
-    return players.findBy('team_id', params.team_id);
+    return this.store.find('player_id', params.player_id)
   }
 });
