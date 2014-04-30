@@ -11,6 +11,7 @@ StatTracker.Team.FIXTURES = [
   },
   {
     id: 2,
-    name: 'Whiny Howard and the Rockettes'
+    name: 'Whiny Howard and the Rockettes',
+    players: ['3','4']
   }
 ];
